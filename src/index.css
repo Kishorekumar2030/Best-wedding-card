@@ -1,0 +1,125 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-canvas: #0b0709;
+    --bg-surface: #150d11;
+    --bg-elevated: #1e1217;
+    --border-gold: rgba(212, 168, 83, 0.26);
+    --text-ivory: #f5ece0;
+    --text-sand: #c2b09e;
+    --accent-gold: #d4a853;
+    --accent-gold-bright: #ecd08b;
+    --accent-crimson: #9e1b24;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #0b0709;
+    color: #f5ece0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: #0b0709;
+    color: #f5ece0;
+    overflow-x: hidden;
+  }
+}
+
+.font-display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-dev {
+  font-family: 'Noto Serif Devanagari', serif;
+}
+
+/* Falling golden marigold petals */
+@keyframes petalFall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.65;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(var(--dx, 40px), 112vh, 0) rotate(520deg);
+    opacity: 0;
+  }
+}
+
+.petal-particle {
+  animation: petalFall linear infinite;
+  will-change: transform, opacity;
+}
+
+/* Gentle book float & tassel sway */
+@keyframes royalFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.book-float {
+  animation: royalFloat 3.6s ease-in-out infinite;
+}
+
+@keyframes tasselSway {
+  0%, 100% {
+    transform: translateX(-50%) rotate(-3deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(3.5deg);
+  }
+}
+
+.tassel-sway {
+  transform-origin: top center;
+  animation: tasselSway 3.4s ease-in-out infinite;
+}
+
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: scaleY(1) scaleX(1);
+    opacity: 0.92;
+  }
+  50% {
+    transform: scaleY(1.08) scaleX(0.94);
+    opacity: 1;
+  }
+}
+
+.diya-flame {
+  transform-origin: center bottom;
+  animation: flameFlicker 2.2s ease-in-out infinite;
+}
+
+/* Hide scrollbars cleanly for mobile horizontal deck */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .petal-particle,
+  .book-float,
+  .tassel-sway,
+  .diya-flame {
+    animation: none !important;
+  }
+}
